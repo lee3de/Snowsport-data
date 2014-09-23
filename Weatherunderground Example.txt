@@ -1,0 +1,297 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library("RCurl")
+Error in library("RCurl") : there is no package called ‘RCurl’
+> utils:::menuInstallPkgs()
+--- Please select a CRAN mirror for use in this session ---
+also installing the dependency ‘bitops’
+
+trying URL 'http://cran.cnr.Berkeley.edu/bin/windows/contrib/3.1/bitops_1.0-6.zip'
+Content type 'application/zip' length 36021 bytes (35 Kb)
+opened URL
+downloaded 35 Kb
+
+trying URL 'http://cran.cnr.Berkeley.edu/bin/windows/contrib/3.1/RCurl_1.95-4.3.zip'
+Content type 'application/zip' length 2835499 bytes (2.7 Mb)
+opened URL
+downloaded 2.7 Mb
+
+package ‘bitops’ successfully unpacked and MD5 sums checked
+package ‘RCurl’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\Dana\AppData\Local\Temp\RtmpaiMfnt\downloaded_packages
+> library("RCurl")
+Loading required package: bitops
+> library("rjson")
+> json_data <- "http://api.wunderground.com/api/1713fa406e9862a0/San_Francisco.json"
+> json.data <- fromJSON(paste(readlines(json_data),collapse=""))
+Error in paste(readlines(json_data), collapse = "") : 
+  could not find function "readlines"
+> json.data <- fromJSON(paste(readLines(json_data),collapse=""))
+> str(json.data)
+List of 1
+ $ response:List of 4
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      : list()
+  ..$ error         :List of 2
+  .. ..$ type       : chr "invalidquery"
+  .. ..$ description: chr "you must supply a location query"
+> json_data <- "http://api.wunderground.com/api/af9a1018b3c786d4/conditions/q/VA/Richmond.json"
+> json.data <- fromJSON(paste(readLines(json_data),collapse=""))
+> str(json.data)
+List of 2
+ $ response           :List of 3
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      :List of 1
+  .. ..$ conditions: num 1
+ $ current_observation:List of 56
+  ..$ image                  :List of 3
+  .. ..$ url  : chr "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+  .. ..$ title: chr "Weather Underground"
+  .. ..$ link : chr "http://www.wunderground.com"
+  ..$ display_location       :List of 12
+  .. ..$ full           : chr "Richmond, VA"
+  .. ..$ city           : chr "Richmond"
+  .. ..$ state          : chr "VA"
+  .. ..$ state_name     : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ zip            : chr "23173"
+  .. ..$ magic          : chr "1"
+  .. ..$ wmo            : chr "99999"
+  .. ..$ latitude       : chr "37.57757950"
+  .. ..$ longitude      : chr "-77.53469849"
+  .. ..$ elevation      : chr "68.00000000"
+  ..$ observation_location   :List of 8
+  .. ..$ full           : chr "University Hts., Richmond, Virginia"
+  .. ..$ city           : chr "University Hts., Richmond"
+  .. ..$ state          : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ latitude       : chr "37.588017"
+  .. ..$ longitude      : chr "-77.556076"
+  .. ..$ elevation      : chr "276 ft"
+  ..$ estimated              : list()
+  ..$ station_id             : chr "KVARICHM48"
+  ..$ observation_time       : chr "Last Updated on September 22, 9:12 PM EDT"
+  ..$ observation_time_rfc822: chr "Mon, 22 Sep 2014 21:12:28 -0400"
+  ..$ observation_epoch      : chr "1411434748"
+  ..$ local_time_rfc822      : chr "Mon, 22 Sep 2014 21:12:34 -0400"
+  ..$ local_epoch            : chr "1411434754"
+  ..$ local_tz_short         : chr "EDT"
+  ..$ local_tz_long          : chr "America/New_York"
+  ..$ local_tz_offset        : chr "-0400"
+  ..$ weather                : chr "Clear"
+  ..$ temperature_string     : chr "65.0 F (18.3 C)"
+  ..$ temp_f                 : num 65
+  ..$ temp_c                 : num 18.3
+  ..$ relative_humidity      : chr "57%"
+  ..$ wind_string            : chr "From the NNE at 1.1 MPH Gusting to 1.1 MPH"
+  ..$ wind_dir               : chr "NNE"
+  ..$ wind_degrees           : num 23
+  ..$ wind_mph               : num 1.1
+  ..$ wind_gust_mph          : chr "1.1"
+  ..$ wind_kph               : num 1.8
+  ..$ wind_gust_kph          : chr "1.8"
+  ..$ pressure_mb            : chr "1021"
+  ..$ pressure_in            : chr "30.15"
+  ..$ pressure_trend         : chr "+"
+  ..$ dewpoint_string        : chr "49 F (10 C)"
+  ..$ dewpoint_f             : num 49
+  ..$ dewpoint_c             : num 10
+  ..$ heat_index_string      : chr "NA"
+  ..$ heat_index_f           : chr "NA"
+  ..$ heat_index_c           : chr "NA"
+  ..$ windchill_string       : chr "NA"
+  ..$ windchill_f            : chr "NA"
+  ..$ windchill_c            : chr "NA"
+  ..$ feelslike_string       : chr "65.0 F (18.3 C)"
+  ..$ feelslike_f            : chr "65.0"
+  ..$ feelslike_c            : chr "18.3"
+  ..$ visibility_mi          : chr "10.0"
+  ..$ visibility_km          : chr "16.1"
+  ..$ solarradiation         : chr "--"
+  ..$ UV                     : chr "0"
+  ..$ precip_1hr_string      : chr "0.00 in ( 0 mm)"
+  ..$ precip_1hr_in          : chr "0.00"
+  ..$ precip_1hr_metric      : chr " 0"
+  ..$ precip_today_string    : chr "0.00 in (0 mm)"
+  ..$ precip_today_in        : chr "0.00"
+  ..$ precip_today_metric    : chr "0"
+  ..$ icon                   : chr "clear"
+  ..$ icon_url               : chr "http://icons.wxug.com/i/c/k/nt_clear.gif"
+  ..$ forecast_url           : chr "http://www.wunderground.com/US/VA/Richmond.html"
+  ..$ history_url            : chr "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KVARICHM48"
+  ..$ ob_url                 : chr "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.588017,-77.556076"
+  ..$ nowcast                : chr ""
+> json.data$current_observation$display_location$latitude
+[1] "37.57757950"
+> isnumeric(json.data$current_observation$display_location$latitude)
+Error: could not find function "isnumeric"
+> is.numeric(json.data$current_observation$display_location$latitude)
+[1] FALSE
+> is.character(json.data$current_observation$display_location$latitude)
+[1] TRUE
+> json.data$current_observation$observation_time
+[1] "Last Updated on September 22, 9:12 PM EDT"
+> is.character(json.data$current_$temperature-string
++ 
++ [
++ is.character(json.data$current_observation$temperature_string)
+
++ > is.character(json.data$current_observation$obervation_time
++ json_data <- "http://api.wunderground.com/api/af9a1018b3c786d4/conditions/q/VA/Richmond.json"
+Error: unexpected symbol in:
+"is.character(json.data$current_observation$obervation_time
+json_data"
+> json_data <- "http://api.wunderground.com/api/af9a1018b3c786d4/conditions/q/VA/Richmond.json"
+> json.data <- fromJSON(paste(readlines(json_data),collapse=""))
+Error in paste(readlines(json_data), collapse = "") : 
+  could not find function "readlines"
+> json.data <- fromJSON(paste(readLines(json_data),collapse=""))
+> str(json.data)
+List of 2
+ $ response           :List of 3
+  ..$ version       : chr "0.1"
+  ..$ termsofService: chr "http://www.wunderground.com/weather/api/d/terms.html"
+  ..$ features      :List of 1
+  .. ..$ conditions: num 1
+ $ current_observation:List of 56
+  ..$ image                  :List of 3
+  .. ..$ url  : chr "http://icons.wxug.com/graphics/wu2/logo_130x80.png"
+  .. ..$ title: chr "Weather Underground"
+  .. ..$ link : chr "http://www.wunderground.com"
+  ..$ display_location       :List of 12
+  .. ..$ full           : chr "Richmond, VA"
+  .. ..$ city           : chr "Richmond"
+  .. ..$ state          : chr "VA"
+  .. ..$ state_name     : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ zip            : chr "23173"
+  .. ..$ magic          : chr "1"
+  .. ..$ wmo            : chr "99999"
+  .. ..$ latitude       : chr "37.57757950"
+  .. ..$ longitude      : chr "-77.53469849"
+  .. ..$ elevation      : chr "68.00000000"
+  ..$ observation_location   :List of 8
+  .. ..$ full           : chr "University Hts., Richmond, Virginia"
+  .. ..$ city           : chr "University Hts., Richmond"
+  .. ..$ state          : chr "Virginia"
+  .. ..$ country        : chr "US"
+  .. ..$ country_iso3166: chr "US"
+  .. ..$ latitude       : chr "37.588017"
+  .. ..$ longitude      : chr "-77.556076"
+  .. ..$ elevation      : chr "276 ft"
+  ..$ estimated              : list()
+  ..$ station_id             : chr "KVARICHM48"
+  ..$ observation_time       : chr "Last Updated on September 22, 10:14 PM EDT"
+  ..$ observation_time_rfc822: chr "Mon, 22 Sep 2014 22:14:24 -0400"
+  ..$ observation_epoch      : chr "1411438464"
+  ..$ local_time_rfc822      : chr "Mon, 22 Sep 2014 22:14:26 -0400"
+  ..$ local_epoch            : chr "1411438466"
+  ..$ local_tz_short         : chr "EDT"
+  ..$ local_tz_long          : chr "America/New_York"
+  ..$ local_tz_offset        : chr "-0400"
+  ..$ weather                : chr "Partly Cloudy"
+  ..$ temperature_string     : chr "64.1 F (17.8 C)"
+  ..$ temp_f                 : num 64.1
+  ..$ temp_c                 : num 17.8
+  ..$ relative_humidity      : chr "57%"
+  ..$ wind_string            : chr "Calm"
+  ..$ wind_dir               : chr "NE"
+  ..$ wind_degrees           : num 45
+  ..$ wind_mph               : num 0.2
+  ..$ wind_gust_mph          : num 0
+  ..$ wind_kph               : num 0
+  ..$ wind_gust_kph          : num 0
+  ..$ pressure_mb            : chr "1022"
+  ..$ pressure_in            : chr "30.17"
+  ..$ pressure_trend         : chr "+"
+  ..$ dewpoint_string        : chr "48 F (9 C)"
+  ..$ dewpoint_f             : num 48
+  ..$ dewpoint_c             : num 9
+  ..$ heat_index_string      : chr "NA"
+  ..$ heat_index_f           : chr "NA"
+  ..$ heat_index_c           : chr "NA"
+  ..$ windchill_string       : chr "NA"
+  ..$ windchill_f            : chr "NA"
+  ..$ windchill_c            : chr "NA"
+  ..$ feelslike_string       : chr "64.1 F (17.8 C)"
+  ..$ feelslike_f            : chr "64.1"
+  ..$ feelslike_c            : chr "17.8"
+  ..$ visibility_mi          : chr "10.0"
+  ..$ visibility_km          : chr "16.1"
+  ..$ solarradiation         : chr "--"
+  ..$ UV                     : chr "0"
+  ..$ precip_1hr_string      : chr "0.00 in ( 0 mm)"
+  ..$ precip_1hr_in          : chr "0.00"
+  ..$ precip_1hr_metric      : chr " 0"
+  ..$ precip_today_string    : chr "0.00 in (0 mm)"
+  ..$ precip_today_in        : chr "0.00"
+  ..$ precip_today_metric    : chr "0"
+  ..$ icon                   : chr "partlycloudy"
+  ..$ icon_url               : chr "http://icons.wxug.com/i/c/k/nt_partlycloudy.gif"
+  ..$ forecast_url           : chr "http://www.wunderground.com/US/VA/Richmond.html"
+  ..$ history_url            : chr "http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KVARICHM48"
+  ..$ ob_url                 : chr "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=37.588017,-77.556076"
+  ..$ nowcast                : chr ""
+> json.data$current_observation$display_location$latitude
+[1] "37.57757950"
+> is.numeric(json.data$current_observation$display_location$latitude)
+[1] FALSE
+> is.character(json.data$current_observation$display_location$latitude)
+[1] TRUE
+> json.data$current_observation$observation_time
+[1] "Last Updated on September 22, 10:14 PM EDT"
+> is.character(json.data$current_observation$observation_time
++ is.character(json.data$current_observation$observation_time)
+Error: unexpected symbol in:
+"is.character(json.data$current_observation$observation_time
+is.character"
+> is.character(json.data$current_observation$observation_time)
+[1] TRUE
+> json.data$current_observation$temperature_string
+[1] "64.1 F (17.8 C)"
+> is.character(json.data$current_observation$temperature_string)
+[1] TRUE
+> json.data$current_observation$temp_f
+[1] 64.1
+> is.character(json.data$current_observation$temp_f)
+[1] FALSE
+> is.numeric(json.data$current_obsercvation$temp_f)
+[1] FALSE
+> is.numeric(json.data$current_observation$temp_f)
+[1] TRUE
+> obs.location <- rep(NA,length(json.data$current_observation$observation_location))
+> for (n in 1:length(json.data$current_observation$observation_location)) {
++ obs.location[n] <- json.data$current_observation$observation_location[[n]]
++ }
+> obs.location
+[1] "University Hts., Richmond, Virginia" "University Hts., Richmond"          
+[3] "Virginia"                            "US"                                 
+[5] "US"                                  "37.588017"                          
+[7] "-77.556076"                          "276 ft"                             
+> obs.location[8]
+[1] "276 ft"
+> 
